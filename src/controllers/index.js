@@ -1,10 +1,13 @@
 import SampleController from './sampleController'
 import UserController from './userController'
+import PostController from './postController'
 
-let sampleController = new SampleController();
-let userController = new UserController();
+const sampleController = new SampleController();
+const userController = new UserController();
+const postController = new PostController();
 
 export {
     sampleController,
-    userController
+    userController,
+    postController
 }

@@ -18,6 +18,10 @@ let Post = function () {
 			ref: 'users',
 			required: true
 		},
+		category: {
+			type: Schema.Types.ObjectId,
+			ref: 'category'
+		},
 		createdAt: {
 			type: Date,
 			default: new Date()

@@ -6,9 +6,14 @@ export default class BaseRouter {
     }
 
     handleError(res, error){
-        console.log("ERROR");
-        console.log(error);
-        if (error && error.code && error.message){
+        if (error && error._message){
+            res.status(500).json({
+                type: 'mongoose_exception',
+                message: error._message
+            });
+
+        }
+        else if (error && error.code && error.message){
             res.status(error.code).json(error);
         }
         else res.status(500).json({

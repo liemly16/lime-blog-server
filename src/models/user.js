@@ -1,18 +1,33 @@
 import mongoose from 'mongoose';
+import passwordHash from 'password-hash';
 
 let User = function () {
-	var sampleSchema = mongoose.Schema({
-		username: String,
-		password: String,
+	var userSchema = mongoose.Schema({
+		username: {
+			type: String,
+			required: true
+		},
+		password: {
+			type: String,
+			required: true
+		},
 		fullname: String,
 		avatar: String,
 		description: String,
-		createdAt: Date,
-		status: Boolean,
-		updatedAt: Date,
+		createdAt: {
+			type: Date,
+			default: new Date()
+		}
 	});
 
-	return mongoose.model('users', sampleSchema);
+	userSchema.pre('save', function(next){
+		this.password = passwordHash.generate(this.password);
+		next();
+	});
+
+	return mongoose.model('users', userSchema);
 }
+
+
 
 export default new User();
